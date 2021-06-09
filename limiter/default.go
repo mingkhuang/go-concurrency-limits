@@ -73,7 +73,7 @@ func (l *DefaultListener) OnSuccess() {
 				l.limiter.nextUpdateTime = endTime + minVal
 				l.limiter.limit.OnSample(
 					0,
-					current.CandidateRTTNanoseconds(),
+					current.AverageRTTNanoseconds(),
 					current.MaxInFlight(),
 					current.DidDrop(),
 				)
