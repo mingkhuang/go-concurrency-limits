@@ -248,7 +248,8 @@ func (l *VegasLimit) shouldProbe() bool {
 }
 
 func (l *VegasLimit) updateEstimatedLimit(startTime int64, rtt int64, inFlight int, didDrop bool) {
-	queueSize := int(math.Ceil(l.estimatedLimit * (1 - l.rttNoLoad.Get()/float64(rtt))))
+	base := 1e7
+	queueSize := int(math.Ceil(l.estimatedLimit * (1 - (l.rttNoLoad.Get()+base)/(float64(rtt)+base))))
 
 	var newLimit float64
 	// Treat any drop (i.e timeout) as needing to reduce the limit
@@ -281,8 +282,8 @@ func (l *VegasLimit) updateEstimatedLimit(startTime int64, rtt int64, inFlight i
 	newLimit = (1-l.smoothing)*l.estimatedLimit + l.smoothing*newLimit
 
 	if int(newLimit) != int(l.estimatedLimit) && l.logger.IsDebugEnabled() {
-		l.logger.Debugf("New limit=%d, minRTT=%d ms, winRTT=%d ms, queueSize=%d",
-			int(newLimit), int64(l.rttNoLoad.Get())/1e6, rtt/1e6, queueSize)
+		l.logger.Debugf("inFlight=%v, Old limit=%v, New limit=%v, minRTT=%d us, winRTT=%d us, queueSize=%d",
+			inFlight, l.estimatedLimit, newLimit, int64(l.rttNoLoad.Get())/1e3, rtt/1e3, queueSize)
 	}
 
 	l.estimatedLimit = newLimit
