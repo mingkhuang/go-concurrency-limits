@@ -24,9 +24,9 @@ type VegasLimit struct {
 	maxLimit          int
 	rttNoLoad         core.MeasurementInterface
 	smoothing         float64
-	alphaFunc         func(estimatedLimit int) int
-	betaFunc          func(estimatedLimit int) int
-	thresholdFunc     func(estimatedLimit int) int
+	alphaFunc         func(estimatedLimit float64) float64
+	betaFunc          func(estimatedLimit float64) float64
+	thresholdFunc     func(estimatedLimit float64) float64
 	increaseFunc      func(estimatedLimit float64) float64
 	decreaseFunc      func(estimatedLimit float64) float64
 	rttSampleListener core.MetricSampleListener
@@ -99,9 +99,9 @@ func NewVegasLimitWithRegistry(
 	rttNoLoad core.MeasurementInterface,
 	maxConcurrency int,
 	smoothing float64,
-	alphaFunc func(estimatedLimit int) int,
-	betaFunc func(estimatedLimit int) int,
-	thresholdFunc func(estimatedLimit int) int,
+	alphaFunc func(estimatedLimit float64) float64,
+	betaFunc func(estimatedLimit float64) float64,
+	thresholdFunc func(estimatedLimit float64) float64,
 	increaseFunc func(estimatedLimit float64) float64,
 	decreaseFunc func(estimatedLimit float64) float64,
 	probeMultiplier int,
@@ -129,23 +129,22 @@ func NewVegasLimitWithRegistry(
 		probeMultiplier = 30
 	}
 
-	defaultLogFunc := functions.Log10RootFunction(0)
+	defaultLogFloatFunc := functions.Log10RootFloatFunction(0)
 	if alphaFunc == nil {
-		alphaFunc = func(limit int) int {
-			return 3 * defaultLogFunc(limit)
+		alphaFunc = func(limit float64) float64 {
+			return 3 * defaultLogFloatFunc(limit)
 		}
 	}
 	if betaFunc == nil {
-		betaFunc = func(limit int) int {
-			return 6 * defaultLogFunc(limit)
+		betaFunc = func(limit float64) float64 {
+			return 6 * defaultLogFloatFunc(limit)
 		}
 	}
 	if thresholdFunc == nil {
-		thresholdFunc = func(limit int) int {
-			return defaultLogFunc(limit)
+		thresholdFunc = func(limit float64) float64 {
+			return defaultLogFloatFunc(limit)
 		}
 	}
-	defaultLogFloatFunc := functions.Log10RootFloatFunction(0)
 	if increaseFunc == nil {
 		increaseFunc = func(limit float64) float64 {
 			return limit + defaultLogFloatFunc(limit)
@@ -249,29 +248,29 @@ func (l *VegasLimit) shouldProbe() bool {
 
 func (l *VegasLimit) updateEstimatedLimit(startTime int64, rtt int64, inFlight int, didDrop bool) {
 	base := 1e7
-	queueSize := int(math.Ceil(l.estimatedLimit * (1 - (l.rttNoLoad.Get()+base)/(float64(rtt)+base))))
+	queueSize := l.estimatedLimit * (1 - (l.rttNoLoad.Get()+base)/(float64(rtt)+base))
 
 	var newLimit float64
 	// Treat any drop (i.e timeout) as needing to reduce the limit
 	if didDrop {
 		newLimit = l.decreaseFunc(l.estimatedLimit)
-	} else if float64(inFlight)*2 < l.estimatedLimit {
-		// Prevent upward drift if not close to the limit
-		return
 	} else {
-		alpha := l.alphaFunc(int(l.estimatedLimit))
-		beta := l.betaFunc(int(l.estimatedLimit))
-		threshold := l.thresholdFunc(int(l.estimatedLimit))
+		alpha := l.alphaFunc(l.estimatedLimit)
+		beta := l.betaFunc(l.estimatedLimit)
+		threshold := l.thresholdFunc(l.estimatedLimit)
 
-		if queueSize < threshold {
+		if queueSize > beta {
+			// Detecting latency so decrease
+			newLimit = l.decreaseFunc(l.estimatedLimit)
+		} else if float64(inFlight)*2 < l.estimatedLimit {
+			// Prevent upward drift if not close to the limit
+			return
+		} else if queueSize < threshold {
 			// Aggressive increase when no queuing
-			newLimit = l.estimatedLimit + float64(beta)
+			newLimit = l.estimatedLimit + beta
 		} else if queueSize < alpha {
 			// Increase the limit if queue is still manageable
 			newLimit = l.increaseFunc(l.estimatedLimit)
-		} else if queueSize > beta {
-			// Detecting latency so decrease
-			newLimit = l.decreaseFunc(l.estimatedLimit)
 		} else {
 			// otherwise we're within he sweet spot so nothing to do
 			return
@@ -282,7 +281,7 @@ func (l *VegasLimit) updateEstimatedLimit(startTime int64, rtt int64, inFlight i
 	newLimit = (1-l.smoothing)*l.estimatedLimit + l.smoothing*newLimit
 
 	if int(newLimit) != int(l.estimatedLimit) && l.logger.IsDebugEnabled() {
-		l.logger.Debugf("inFlight=%v, Old limit=%v, New limit=%v, minRTT=%d us, winRTT=%d us, queueSize=%d",
+		l.logger.Debugf("inFlight=%v, Old limit=%v, New limit=%v, minRTT=%d us, winRTT=%d us, queueSize=%v",
 			inFlight, l.estimatedLimit, newLimit, int64(l.rttNoLoad.Get())/1e3, rtt/1e3, queueSize)
 	}
 
