@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
 )
 
 func ExampleFixedPool() {

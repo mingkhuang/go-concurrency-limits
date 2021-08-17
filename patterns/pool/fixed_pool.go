@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit"
-	"github.com/platinummonkey/go-concurrency-limits/limiter"
-	"github.com/platinummonkey/go-concurrency-limits/strategy"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/limiter"
+	"github.com/mingkhuang/go-concurrency-limits/strategy"
 )
 
 // FixedPool implements a fixed size blocking pool.

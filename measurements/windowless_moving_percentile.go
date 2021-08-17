@@ -9,7 +9,7 @@ import (
 // This implementation uses a windowless calculation that while not strictly always accurate,
 // provides a very close estimation in O(1) time and space.
 // Much credit goes to Martin Jambon here: https://mjambon.com/2016-07-23-moving-percentile/
-// a copy can be found in github.com/platinummonkey/go-concurrency-limits/docs/assets/moving_percentile_reference.pdf
+// a copy can be found in github.com/mingkhuang/go-concurrency-limits/docs/assets/moving_percentile_reference.pdf
 // and this is a port of the OCaml implementation provided in that reference.
 type WindowlessMovingPercentile struct {
 	p            float64

@@ -2,7 +2,7 @@ package limit
 
 import (
 	"fmt"
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 // FixedLimit is a non dynamic limit with fixed value.

@@ -6,9 +6,9 @@ import (
 	"math/rand"
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit/functions"
-	"github.com/platinummonkey/go-concurrency-limits/measurements"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit/functions"
+	"github.com/mingkhuang/go-concurrency-limits/measurements"
 )
 
 // GradientLimit implements a concurrency limit algorithm that adjust the limits based on the gradient of change in the

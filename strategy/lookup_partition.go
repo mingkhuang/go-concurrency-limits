@@ -6,8 +6,8 @@ import (
 	"math"
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/strategy/matchers"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/strategy/matchers"
 )
 
 // PartitionTagName represents the metric tag used for the partition identifier

@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
 )
 
 // DeadlineLimiter that blocks the caller when the limit has been reached.  The caller is

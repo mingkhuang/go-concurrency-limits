@@ -6,7 +6,7 @@ import (
 	"math"
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 // PredicatePartition defines a partition for the PredicatePartitionStrategy

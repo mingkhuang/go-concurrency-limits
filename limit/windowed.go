@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/measurements"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/measurements"
 )
 
 // WindowedLimit implements a windowed limit

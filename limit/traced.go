@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 // Logger implements a basic dependency to log. Feel free to report stats as well.

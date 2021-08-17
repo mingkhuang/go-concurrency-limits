@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 // SettableLimit is a fixed limit that can be changed.

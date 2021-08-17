@@ -3,7 +3,7 @@ package limiter
 import (
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 // DelegateListener wraps the wrapped Limiter's Listener to simply delegate as a wrapper.

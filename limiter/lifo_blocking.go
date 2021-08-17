@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 type lifoElement struct {

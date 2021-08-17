@@ -6,8 +6,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
 )
 
 const longBlockingTimeout = time.Hour * 24 * 30 * 12 * 100 // 100 years

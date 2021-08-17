@@ -5,10 +5,10 @@ import (
 
 	golangGrpc "google.golang.org/grpc"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit"
-	"github.com/platinummonkey/go-concurrency-limits/limiter"
-	"github.com/platinummonkey/go-concurrency-limits/strategy"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/limiter"
+	"github.com/mingkhuang/go-concurrency-limits/strategy"
 )
 
 // StreamClientResponseClassifier is a method definition for defining custom response types to the limiter algorithm to

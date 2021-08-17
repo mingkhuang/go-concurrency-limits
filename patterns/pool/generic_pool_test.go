@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/limit"
-	"github.com/platinummonkey/go-concurrency-limits/limiter"
-	"github.com/platinummonkey/go-concurrency-limits/strategy"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/limiter"
+	"github.com/mingkhuang/go-concurrency-limits/strategy"
 	"github.com/stretchr/testify/assert"
 )
 

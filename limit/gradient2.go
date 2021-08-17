@@ -5,8 +5,8 @@ import (
 	"math"
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/measurements"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/measurements"
 )
 
 // Gradient2Limit implements a concurrency limit algorithm that adjust the limits based on the gradient of change current

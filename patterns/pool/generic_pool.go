@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit"
-	"github.com/platinummonkey/go-concurrency-limits/limiter"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/limiter"
 )
 
 // Ordering define the pattern for ordering requests on Pool

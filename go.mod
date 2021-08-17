@@ -1,4 +1,4 @@
-module github.com/platinummonkey/go-concurrency-limits
+module github.com/mingkhuang/go-concurrency-limits
 
 go 1.11
 

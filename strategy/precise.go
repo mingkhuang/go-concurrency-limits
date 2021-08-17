@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 // PreciseStrategy strategy is much more strict than Simple strategy. It uses a sync.Mutex to keep track of

@@ -7,10 +7,10 @@ import (
 	golangGrpc "google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit"
-	"github.com/platinummonkey/go-concurrency-limits/limiter"
-	"github.com/platinummonkey/go-concurrency-limits/strategy"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit"
+	"github.com/mingkhuang/go-concurrency-limits/limiter"
+	"github.com/mingkhuang/go-concurrency-limits/strategy"
 )
 
 // ResponseType is the type of token release that should be specified to the limiter algorithm.

@@ -6,9 +6,9 @@ import (
 	"math/rand"
 	"sync"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
-	"github.com/platinummonkey/go-concurrency-limits/limit/functions"
-	"github.com/platinummonkey/go-concurrency-limits/measurements"
+	"github.com/mingkhuang/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/limit/functions"
+	"github.com/mingkhuang/go-concurrency-limits/measurements"
 )
 
 // VegasLimit implements a Limiter based on TCP Vegas where the limit increases by alpha if the queue_use is

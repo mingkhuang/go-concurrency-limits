@@ -9,7 +9,7 @@ import (
 
 	dogstatsd "github.com/DataDog/datadog-go/statsd"
 
-	"github.com/platinummonkey/go-concurrency-limits/core"
+	"github.com/mingkhuang/go-concurrency-limits/core"
 )
 
 const defaultMetricPrefix = "limiter."
